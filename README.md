@@ -8,8 +8,13 @@ Project use **[Yarn 2](https://yarnpkg.com/getting-started/install)**.
 
 **目录**
 
-[TOC]
-
+- [Matchers 匹配器](#matchers-匹配器)
+- [异步代码](#异步代码)
+- [钩子函数](#钩子函数)
+- [Mock](#mock)
+- [Timer](#timer)
+- [Snapshot 快照](#snapshot-快照)
+- [Dom](#dom)
 
 ### Matchers 匹配器
 
