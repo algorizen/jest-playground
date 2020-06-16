@@ -1,22 +1,17 @@
-# jest-playground
+# Jest Playground
 
 Leaning jest.
 
-project use yarn 2.
+Project use **[Yarn 2](https://yarnpkg.com/getting-started/install)**.
 
 ## Jest Basic
 
 **目录**
 
-- [匹配器 matchers](#匹配器-matchers)
-- [异步代码](#异步代码)
-- [钩子函数](#钩子函数)
-- [mock](#mock)
-- [timer](#timer)
-- [snapshot](#snapshot)
-- [dom](#dom)
+[TOC]
 
-### 匹配器 matchers
+
+### Matchers 匹配器
 
 文档五分钟
 
@@ -24,7 +19,7 @@ project use yarn 2.
 
 ### 异步代码
 
-```
+```JavaScript
 // fetchData.js
 export const fetchData = () => {
   return axios.get('https://api.xxxx')
@@ -34,7 +29,7 @@ export const fetchData = () => {
 #### done()
 
 
-```
+```JavaScript
 // fetchData.test.js
 import { fetchData } from '../src/fetchData'
 
@@ -51,7 +46,7 @@ test('test async code', (done) => {
 #### .then() 和 .catch()
 
 
-```
+```JavaScript
 // fetchData.test.js
 import { fetchData } from '../src/fetchData'
 
@@ -74,7 +69,7 @@ test('test async code', () => {
 
 #### .resolves 和  .rejects
 
-```
+```JavaScript
 // fetchData.test.js
 import { fetchData } from '../src/fetchData'
 
@@ -93,7 +88,7 @@ test('test async code', () => {
 
 #### async / await
 
-```
+```JavaScript
 // fetchData.test.js
 import { fetchData } from '../src/fetchData'
 
@@ -119,7 +114,7 @@ test('test async code', async () => {
 
 ### 钩子函数
 
-```
+```JavaScript
 beforeAll(() => console.log('1 - beforeAll'))
 afterAll(() => console.log('1 - afterAll'))
 beforeEach(() => console.log('1 - beforeEach'))
@@ -151,9 +146,9 @@ describe('Scoped / Nested block', () => {
  */
 ```
 
-### mock
+### Mock
 
-```
+```JavaScript
 // mock.js
 import axios from 'axios'
 
@@ -170,7 +165,7 @@ export const fetchData = () => {
 }
 ```
 
-```
+```JavaScript
 // mock.test.js
 import Axios from 'axios'
 import { runCallback, createObject, fetchData } from '../src/mock'
@@ -248,11 +243,11 @@ mock 函数的作用：
 2. 它可以让我们自由的设置返回结果
 3. 改变内部函数内部的实现
 
-#### mock高级操作
+#### Mock 高级操作
 
 目录树
 
-```
+```Bash
 $ tree
 .
 ├── jest.config.js
@@ -269,7 +264,7 @@ $ tree
 
 **`__mocks__` 需要和测试的文件同一级**
 
-```
+```JavaScript
 // ./src/__mocks__/mock.js
 
 export const fetchData = () => {
@@ -279,7 +274,7 @@ export const fetchData = () => {
 }
 ```
 
-```
+```JavaScript
 // ./src/mock.js
 
 export const fetchData = () => {
@@ -287,7 +282,7 @@ export const fetchData = () => {
 }
 ```
 
-```
+```JavaScript
 // ./test/mock.test.js
 
 /**
@@ -313,11 +308,11 @@ test('test getNumber', () => {
 })
 ```
 
-#### 类的mock
+#### 类的 Mock
 
 **单元测试**（只对我自己的一些功能点做测试）
 
-```
+```JavaScript
 // utils.js
 export default class Utils {
   a(a, b) {
@@ -332,7 +327,7 @@ export default class Utils {
 }
 ```
 
-```
+```JavaScript
 // utils.test.js
 import Utils from '../src/utils'
 
@@ -353,7 +348,7 @@ test('test class utils b', () => {
 
 **集成测试**（我功能点下所有的模块、所有依赖一起测试）
 
-```
+```JavaScript
 // mock.js
 import Utils from './utils'
 
@@ -377,7 +372,7 @@ test.only('test initUtils extends utils', () => {
 })
 ```
 
-### timer
+### Timer
 
 `jest.useFakeTimers()`
 
@@ -385,7 +380,7 @@ test.only('test initUtils extends utils', () => {
 - `jest.runOnlyPendingTimers()` - 立即执行队列中的timer，没有加入的不运行
 - `jest.advanceTimersByTime(msToRun)` - 所有计时器都会提前 `msToRun` 毫秒
 
-```
+```JavaScript
 // timer.js
 export const timerOne = (cb) => {
   setTimeout(() => {
@@ -403,7 +398,7 @@ export const timerTwo = (cb) => {
 }
 ```
 
-```
+```JavaScript
 // timer.test.js
 
 import timer from '../src/timer'
@@ -438,9 +433,9 @@ test('test timerTwo', () => {
 })
 ```
 
-### snapshot
+### Snapshot 快照
 
-```
+```JavaScript
 // snap.js
 export const generateConfig = () => {
   return {
@@ -451,7 +446,7 @@ export const generateConfig = () => {
 }
 ```
 
-```
+```JavaScript
 // snap.test.js
 import { generateConfig } from '../src/snap'
 
@@ -464,7 +459,7 @@ test('test generateConfig', () => {
 
 使用 `toMatchInlineSnapshot` 需要安装 Prettier(`yarn add prettier --dev --exact`)。
 
-```
+```JavaScript
 // snap.test.js
 import { generateConfig } from '../src/snap'
 
@@ -484,9 +479,12 @@ test('test generateConfig', () => {
 })
 ```
 
-### dom
+### Dom
 
-```
+Jest 跑在 Node.js 环境不具备 DOM。
+Jest 在 Node.js 环境下自己模拟实现了一套 DOM 的 API —— JSDOM。
+
+```JavaScript
 // dom.js
 import $ from 'jquery'
 
@@ -495,7 +493,7 @@ export const addDivToBody = () => {
 }
 ```
 
-```
+```JavaScript
 // dom.test.js
 import $ from 'jquery'
 import { addDivToBody } from '../src/dom'
@@ -507,8 +505,7 @@ test('test addDivToBody', () => {
 })
 ```
 
-Jest 跑在 Node.js 环境不具备 DOM。
-Jest 在 Node.js 环境下自己模拟实现了一套 DOM 的 API —— JSDOM。
+
 
 
 
